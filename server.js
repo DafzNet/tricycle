@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const admin = require('firebase-admin');
+const serviceAccount = require('./config/serviceAccountKey.json');
 const Flutterwave = require('flutterwave-node-v3');
 const crypto = require('crypto');
 const Joi = require('joi');
@@ -42,7 +43,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Initialize Firebase Admin SDK
 admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
+  credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://ride-62540.firebaseio.com'
 });
 
